@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% import 'bootstrap/wtf.html' as wtf %} {% block app_content %}
+<div class="container">
+    <div class="col-md-9 col-md-offset-1">
+        <div class="row ">
+            <h3 class="text-muted">Reviews</h3>
+            {% if current_user.is_authenticated and not current_user.admin %} {% include 'reviews/_review_form.html' %} {% endif %} {% include 'reviews/_reviews.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

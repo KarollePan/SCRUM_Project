@@ -1,7 +1,226 @@
-
-body{
-	background-color:#c8a2c8;
+body {
+    padding-top: 3.5em;
+    background-color: #f1f1f1;
 }
-navbar-brand{
-	background-color:#FFFFFF;
+
+.thumbnail img {
+    height: 240px;
+    width: 100%;
+}
+
+.footer {
+    background: #d6b4b4;
+}
+
+.jumbotron {
+    height: 92.3vh;
+    width: 100vw;
+    background: url("https://bridebook.imgix.net/weddingsuppliers/venue/EE010647/slider2_dsukkf.jpg?dpr=2&auto=format%2Ccompress&fm=pjpg&mark=https%3A%2F%2Fbridebook-images.imgix.net%2Fassets%2Fc.png&markw=30&markalpha=30&markalign=left&crop=faces&fit=crop&w=1024&h=682") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+@import 'https://fonts.googleapis.com/css?family=Montserrat|Open+Sans';
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase
+}
+
+.navbar .nav {
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 1.2rem
+}
+
+.navbar-inverse {
+    background-color: #d6b4b4
+}
+
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus {
+    background-color: #c8a9a9
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus {
+    background-color: #d6b4b4
+}
+
+.dropdown-menu {
+    background-color: #d6b4b4
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+    background-color: #c8a9a9
+}
+
+.navbar-inverse {
+    background-image: none;
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+    background-image: none;
+}
+
+.navbar-inverse {
+    border-color: #d6b4b4
+}
+
+.navbar-inverse .navbar-brand {
+    color: #FFFFFF
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #FFCC00
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #FFFFFF
+}
+
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus {
+    color: #FFCC00
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus {
+    color: #FFCC00
+}
+
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+    color: #FFCC00
+}
+
+.dropdown-menu>li>a {
+    color: #FFFFFF
+}
+
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+    color: #FFCC00
+}
+
+.navbar-inverse .navbar-nav>.dropdown>a .caret {
+    border-top-color: #FFFFFF
+}
+
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret {
+    border-top-color: #FFFFFF
+}
+
+.navbar-inverse .navbar-nav>.dropdown>a .caret {
+    border-bottom-color: #FFFFFF
+}
+
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret {
+    border-bottom-color: #FFFFFF
+}
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+.pricing-table {
+    background-color: #eee;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pricing-table .block-heading {
+    padding-top: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.pricing-table .block-heading h2 {
+    color: #FFCC00;
+}
+
+.pricing-table .block-heading p {
+    text-align: center;
+    max-width: 420px;
+    margin: auto;
+    opacity: 0.7;
+}
+
+.pricing-table .heading {
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pricing-table .item {
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+    border-top: 2px solid #59a4fa;
+    padding: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pricing-table .col-md-5:not(:last-child) .item {
+    margin-bottom: 30px;
+}
+
+.pricing-table .item button {
+    font-weight: 600;
+}
+
+.pricing-table .ribbon {
+    width: 160px;
+    height: 32px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0px 2px 3px rgba(136, 136, 136, 0.25);
+    background: #FFCC00;
+    transform: rotate(45deg);
+    position: absolute;
+    right: -42px;
+    top: 20px;
+    padding-top: 7px;
+}
+
+.pricing-table .item p {
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0.7;
+}
+
+.pricing-table .features .feature {
+    font-weight: 600;
+}
+
+.pricing-table .features h4 {
+    margin-left: 45px;
+    text-align: left;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.pricing-table .price h4 {
+    margin: 15px 0;
+    font-size: 45px;
+    text-align: center;
+    color: #59a4fa;
+}
+
+.pricing-table .buy-now button {
+    text-align: center;
+    margin: auto;
+    font-weight: 600;
+    padding: 9px 0;
 }

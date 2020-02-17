@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/Karolle/git/scrum_template 2/env"
+VIRTUAL_ENV="/Users/Karolle/git/SCRUM_Project/scrum_template/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
