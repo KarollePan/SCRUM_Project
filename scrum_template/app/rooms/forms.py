@@ -9,7 +9,8 @@ class AddRoomForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(),Length(min=4, max=30)])
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=50, max=5000)])
     image = FileField('Add image', validators=[FileAllowed(['jpg', 'png'])])
-    price = DecimalField('Price', validators=[DataRequired()])    submit = SubmitField('Add room')
+    price = DecimalField('Price', validators=[DataRequired()])
+    submit = SubmitField('Add room')
 
 class EditRoomForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(),Length(min=4, max=100)])
