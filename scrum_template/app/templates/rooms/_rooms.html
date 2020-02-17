@@ -1,0 +1,10 @@
+{% for room in rooms %}
+<div class="col-sm-6 col-md-3">
+    <a href="{{ url_for('rooms.room', id=room.id) }}" class="thumbnail" data-toggle="tooltip" data-placement="top" title="Select image for more details">
+        <img src="{{ url_for('static', filename='room_pics/' + room.image) }}" alt="" class="img-responsive">
+        <!-- <div class="caption text-muted">
+            <p><b>{{book.title.title()}}</b></p>
+        </div> -->
+    </a>
+</div>
+{% endfor %}

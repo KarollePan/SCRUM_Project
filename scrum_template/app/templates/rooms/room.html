@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% import 'bootstrap/wtf.html' as wtf %} {% block app_content %}
+<div class="container">
+    <div class="col-sm-6 col-md-3">
+        <div class="row">
+            <img src="{{ url_for('static', filename='room_pics/' + room.image) }}" alt="" class="thumbnail"> {% if current_user.is_authenticated and current_user.admin %}
+            <a href="{{ url_for('rooms.edit_room', id=room.id) }}" class="btn btn-primary">Edit</a>
+            <!-- Button trigger modal -->
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteroom">Delete</a> {% endif %}
+            <a href="{{ url_for('main.index') }}" class="btn btn-default">Return to all rooms</a>
+        </div>
+    </div>
+
+    <!-- Delete room Modal-->
+    <div class="modal fade" id="deleteroom" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="deleteModalLabel">Deleting room: {{ room.title }}</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <a href="{{ url_for('rooms.delete_room', id=room.id) }}" class="btn btn-danger">Yes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="content-section">
+            <h3>{{ room.title.title() }}</h3>
+            <h5><b>£{{room.price}}</b></h5>
+
+            <hr>
+            <h4>Description</h4>
+            <p class="text-justify">{{ room.description }}</p>
+            <hr>
+        </div>
+    </div>
+    <br><br>
+    <hr>
+</div><br> {% endblock %}

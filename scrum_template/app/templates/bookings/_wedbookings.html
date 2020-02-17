@@ -1,0 +1,32 @@
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Submission Date</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone Number</th>
+            <th>Date</th>
+            <th>Catering</th>
+            <th>Flower Decor</th>
+            <th>Car Hire</th>
+            <th>Visual & Audio</th>
+            <th>Photography</th>
+        </tr>
+        {% for wedbooking in wedbookings %}
+        <tr>
+            <td>{{ wedbooking.created_at }}</td>
+            <td>{{ wedbooking.first_name }}</td>
+            <td>{{ wedbooking.last_name }}</td>
+            <td>{{ wedbooking.email }}</td>
+            <td>{{ wedbooking.telno }}</td>
+            <td>{{ wedbooking.date }}</td>
+            <td>{{ wedbooking.incl_catering }}</td>
+            <td>{{ wedbooking.incl_flowers }}</td>
+            <td>{{ wedbooking.incl_carhire }}</td>
+            <td>{{ wedbooking.incl_visual_and_audio }}</td>
+            <td>{{ wedbooking.incl_photography }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

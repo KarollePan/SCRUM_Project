@@ -1,0 +1,22 @@
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Submission Date</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone Number</th>
+            <th>Description</th>
+        </tr>
+        {% for enquiry in enquiries %}
+        <tr>
+            <td>{{ enquiry.created_at }}</td>
+            <td>{{ enquiry.first_name }}</td>
+            <td>{{ enquiry.last_name }}</td>
+            <td>{{ enquiry.email }}</td>
+            <td>{{ enquiry.telno }}</td>
+            <td>{{ enquiry.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

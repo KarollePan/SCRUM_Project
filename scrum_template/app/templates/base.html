@@ -1,89 +1,143 @@
-<!-- new Coursework -->
-
-{% extends "bootstrap/base.html" %}
-{% block title %}
-    {{ title }} | Weddings
-{% endblock %}
-{% block styles %}
-    {{ super() }}
-    <link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
-{% endblock %}
-
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+{% extends "bootstrap/base.html" %} {% block title %} {{ title }} | Weddings {% endblock %} {% block styles %} {{ super() }}
+<link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet"> {% endblock %} {% block navbar %}
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-
-            </button>
-			<a class="navbar-brand" href="{{ url_for('main.index') }}">Weddings</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+            <a href="{{ url_for('main.index') }}" class="navbar-brand">Stately Home |</a>
         </div>
-        <div class="collapse navbar-collapse">
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.index') }}" >Home</a></li>
-				<li><a href="{{ url_for('main.contact') }}" >Contact</a></li>
-				<li><a href="{{ url_for('main.packagedeals') }}" >Package Deals</a></li>
-				<li><a href="{{ url_for('main.catering') }}" >Catering</a></li>
-				<li><a href="{{ url_for('main.photographers') }}" >Photographers</a></li>
-				<li><a href="{{ url_for('main.carhire') }}" >Car Hire</a></li>
-				<li><a href="{{ url_for('main.music') }}" >Music</a></li>
+                <li>
+                    <!--Car Hire, Catering, Photography, Music, Flower Decorations-->
+                    <a href="{{ url_for('main.services') }}">Services</a>
+
+                </li>
+                <li>
+                    <a href="{{ url_for('main.packagedeals') }}">Package Deals</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.reviews') }}">Reviews</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.contact') }}">Contact Us</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-user"> </span> {{ current_user.username }}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="" >Logout</a></li>
-                        </ul>
-                    </li>
+                <li>
+                    <form class="navbar-form navbar-left" method='POST' action="{{ url_for('rooms.search') }}">
+                        <div class="form-group">
+                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text" name="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
+                </li>
+                {% if current_user.is_authenticated and current_user.admin %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> </span> {{ current_user.username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('rooms.new_room') }}">Add a room</a></li>
+                        <li><a href="{{ url_for('bookings.wedbookings') }}">View wedding bookings</a></li>
+                        <li><a href="{{ url_for('bookings.tourbookings') }}">View tour bookings</a></li>
+                        <li><a href="{{ url_for('main.enquiries') }}">View enquiries</a></li>
+                        <li><a href="{{ url_for('auth.userinfo') }}">User Information</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+                {% elif current_user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"> </span> {{ current_user.username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('bookings.wedbooking') }}">Make a Wedding Booking</a></li>
+                        <li><a href="{{ url_for('bookings.tourbooking') }}">Make a Tour Booking</a></li>
+                        <li><a href="{{ url_for('auth.userinfo') }}">User Information</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    </ul>
+                </li>
                 {% else %}
-                    <li><a href="{{ url_for('auth.login') }}" >Login</a></li>
-                    <li><a href="{{ url_for('auth.register') }}" >Register</a></li>
-					
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                 {% endif %}
             </ul>
-        </div>
+        </nav>
     </div>
-</nav>
-{% endblock %}
+</header>
 
-{% block content %}
-<div class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }} text-center">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <div class="row">
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
+{% endblock %} {% block content %}
+<div class="container-full-bg">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }} text-center">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </a>
+        {{ message }}
     </div>
-	
+    {% endfor %} {% endif %} {% endwith %}
 </div>
-{% endblock %}
 
-{% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                $(this).remove(); 
-            });
-        }, 3000);
-    </script>
+
+{# application content needs to be provided in the app_content block #} {% block app_content %}{% endblock %}
+
+
+
+<div class="container">
+    <footer class="footer navbar-fixed-bottom">
+        <div class="container">
+            <p class="text-muted text-center">
+                &copy;
+                <script>
+                    document.write(
+                        new Date().getFullYear())
+                </script>, Stately Home | Weddings
+            </p>
+        </div>
+    </footer>
+</div>
+{% endblock %} {% block scripts %} {{ super() }} {{ moment.include_moment() }}
+<script src="{{ url_for('static', filename='js/raty/lib/jquery.raty.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 3000);
+
+    $(document).ready(function() {
+        $('#star').raty({
+            path: '/static/js/raty/lib/images',
+            half: true,
+            number: 5,
+            score: $('#result').val(),
+            starType: 'img',
+            targetKeep: true,
+            click: function(score, event) {
+                $('#result').val(score);
+            }
+        });
+
+        $('.avg-rating').raty({
+            path: '/static/js/raty/lib/images',
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-score');
+            }
+        });
+
+        $('.star-rating').raty({
+            path: '/static/js/raty/lib/images',
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-score');
+            }
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 {% endblock %}

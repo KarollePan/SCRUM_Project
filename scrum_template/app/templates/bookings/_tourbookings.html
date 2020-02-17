@@ -1,0 +1,24 @@
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Submission Date</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Telephone Number</th>
+            <th>Date</th>
+            <th>Time</th>
+        </tr>
+        {% for tourbooking in tourbookings %}
+        <tr>
+            <td>{{ tourbooking.created_at }}</td>
+            <td>{{ tourbooking.first_name }}</td>
+            <td>{{ tourbooking.last_name }}</td>
+            <td>{{ tourbooking.email }}</td>
+            <td>{{ tourbooking.telno }}</td>
+            <td>{{ tourbooking.date }}</td>
+            <td>{{ tourbooking.time.hour }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

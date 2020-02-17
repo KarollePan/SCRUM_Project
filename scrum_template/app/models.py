@@ -19,6 +19,8 @@ class User(db.Model, TimestampMixin, UserMixin):
     password_hash = db.Column(db.String(128))
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
+    admin = db.Column(db.Integer, default=0)
+    reviews = db.relationship('Review', backref='user', lazy='dynamic')
 
     # print to console username created
     def __repr__(self):
@@ -44,3 +46,69 @@ class User(db.Model, TimestampMixin, UserMixin):
         except:
             return
         return User.query.get(id)
+
+
+# room class
+# belongs to user
+class Room(TimestampMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(30), nullable=False, unique=True)
+    description = db.Column(db.Text)
+    image = db.Column(db.String(30))
+    price = db.Column(db.Float, default=1.99)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f'<Room {self.title}>'
+
+# review class
+# belongs to user
+class Review(TimestampMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text)
+    rating = db.Column(db.Float, default=0.0)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+# enquiry class
+class Enquiry(TimestampMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20), nullable=False)
+    last_name = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    telno = db.Column(db.String(13), nullable=False)
+    description = db.Column(db.Text)
+
+# wedbooking class
+class WedBooking(TimestampMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20), nullable=False)
+    last_name = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    telno = db.Column(db.String(13), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    incl_catering = db.Column(db.Boolean, nullable=False)
+    incl_flowers = db.Column(db.Boolean, nullable=False)
+    incl_carhire = db.Column(db.Boolean, nullable=False)
+    incl_visual_and_audio = db.Column(db.Boolean, nullable=False)
+    incl_photography = db.Column(db.Boolean, nullable=False)
+
+# tourbooking class
+class TourBooking(TimestampMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20), nullable=False)
+    last_name = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    telno = db.Column(db.String(13), nullable=False)
+    date = db.Column(db.DateTime, nullable=False)
+    time_id = db.Column(db.Integer, db.ForeignKey('time.id'))
+
+# time class
+# belongs to tourbookings
+class Time(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    hour = db.Column(db.String(5), nullable=False)
+    tourbookings = db.relationship('TourBooking', backref='time', lazy='dynamic')
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
