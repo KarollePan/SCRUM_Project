@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from app.models import WedBooking, TourBooking, Time
-from app.bookings.forms import AddWeddingBookingForm, AddTourBookingForm
+from app.bookings.forms import AddWeddingBookingForm, AddTourBookingForm, EditWeddingBookingForm, EditTourBookingForm
 from app import db
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -45,6 +45,37 @@ def wedbookings():
     color = 'success'
     return render_template('bookings/wedbookings.html', title='All Wedding Bookings', wedbookings=wedbookings, msg=msg, color=color)
 
+@bookings.route('/wedbooking/edit/<id>', methods=['GET', 'POST'])
+@login_required
+def edit_wedbooking(id):
+    wedbooking = WedBooking.query.get(id)
+    form = EditWeddingBookingForm(obj=wedbooking)
+    if request.method == 'GET':
+        form.populate_obj(wedbooking)
+    elif request.method == 'POST':
+        if form.update.data and form.validate_on_submit():
+            wedbooking.first_name = form.first_name.data
+            wedbooking.last_name = form.last_name.data
+            wedbooking.email = form.email.data
+            wedbooking.telno = form.telno.data
+            wedbooking.date = form.date.data
+            wedbooking.incl_catering = form.incl_catering.data
+            wedbooking.incl_visual_and_audio = form.incl_visual_and_audio.data
+            wedbooking.incl_photography = form.incl_photography.data
+            wedbooking.incl_flowers = form.incl_flowers.data
+            wedbooking.incl_carhire = form.incl_carhire.data
+            db.session.commit()
+            flash ('Update was successful', 'success')
+            return redirect(url_for('bookings.wedbookings'))
+        if form.cancel.data:
+            return redirect(url_for('bookings.wedbookings'))
+        if form.delete.data:
+            if wedbooking.query.filter_by(id=id).delete():
+                db.session.commit()
+                flash ('Wedding Booking has been deleted', 'success')
+                return redirect(url_for('bookings.wedbookings'))
+    return render_template('bookings/edit_wedbooking.html', title='Edit Tour Booking', form=form)
+
 @bookings.route('/tourbooking', methods=['GET', 'POST'])
 @login_required
 def tourbooking():
@@ -81,3 +112,31 @@ def tourbookings():
     msg = f'{len(tourbookings)} Tour Booking(s)'
     color = 'success'
     return render_template('bookings/tourbookings.html', title='All Tour Bookings', tourbookings=tourbookings, msg=msg, color=color)
+
+@bookings.route('/tourbooking/edit/<id>', methods=['GET', 'POST'])
+@login_required
+def edit_tourbooking(id):
+    tourbooking = TourBooking.query.get(id)
+    form = EditTourBookingForm(obj=tourbooking)
+    form.time_id.choices = [(time.id, time.hour.title()) for time in Time.query.all()]
+    if request.method == 'GET':
+        form.populate_obj(tourbooking)
+    elif request.method == 'POST':
+        if form.update.data and form.validate_on_submit():
+            tourbooking.first_name = form.first_name.data
+            tourbooking.last_name = form.last_name.data
+            tourbooking.email = form.email.data
+            tourbooking.telno = form.telno.data
+            tourbooking.date = form.date.data
+            tourbooking.time_id = form.time_id.data
+            db.session.commit()
+            flash ('Update was successful', 'success')
+            return redirect(url_for('bookings.tourbookings'))
+        if form.cancel.data:
+            return redirect(url_for('bookings.tourbookings'))
+        if form.delete.data:
+            if tourbooking.query.filter_by(id=id).delete():
+                db.session.commit()
+                flash ('Tour Booking has been deleted', 'success')
+                return redirect(url_for('bookings.tourbookings'))
+    return render_template('bookings/edit_tourbooking.html', title='Edit Tour Booking', form=form)
