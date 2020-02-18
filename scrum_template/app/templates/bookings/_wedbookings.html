@@ -12,6 +12,7 @@
             <th>Car Hire</th>
             <th>Visual & Audio</th>
             <th>Photography</th>
+            <th></th>
         </tr>
         {% for wedbooking in wedbookings %}
         <tr>
@@ -26,6 +27,7 @@
             <td>{{ wedbooking.incl_carhire }}</td>
             <td>{{ wedbooking.incl_visual_and_audio }}</td>
             <td>{{ wedbooking.incl_photography }}</td>
+            <td><a href="{{ url_for('bookings.edit_wedbooking', id=wedbooking.id) }}" class="btn btn-primary btn-sm">Edit</a></td>
         </tr>
         {% endfor %}
     </tbody>
