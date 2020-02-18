@@ -67,7 +67,7 @@ def delete_room(id):
         db.session.commit()
         flash ('Room has been deleted', 'success')
         return redirect(url_for('main.index'))
-    return redirect(url_for('rooms.room', id=id))  
+    return redirect(url_for('rooms.room', id=id)) 
 
 @rooms.route('/search', methods=['GET', 'POST'])
 def search():
